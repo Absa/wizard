@@ -1,0 +1,42 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Basic Details</title>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+@{ViewBag.Title = "Basic Details";}
+<body>
+    @model WebApplication1.Models.BasicDetails
+    @{
+        AjaxOptions options = new AjaxOptions();
+        options.HttpMethod = "POST";
+        options.InsertionMode = InsertionMode.Replace;
+        options.UpdateTargetId = "divContainer";
+    }
+    <div id="divContainer">
+
+        @using (Ajax.BeginForm("BasicDetails", "Home", options))
+        {
+            <h1>Step1: Basic Details</h1><br />
+            <hr />
+            <div class="form-group">
+                <div class="col-xs-3">
+                    @Html.LabelFor(m => m.Id)<br /><br />
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Id)<br /><br />
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)<br /><br />
+                    <input type="submit" name="nextBtn" value="Next" />
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
